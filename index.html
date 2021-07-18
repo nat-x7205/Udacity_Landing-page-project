@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Manipulating the DOM</title>
+  <!-- Load Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600|Sacramento" rel="stylesheet">
+  <link href="css/normalize.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HTML Follows BEM naming conventions 
+  IDs are only used for sections to connect menu achors to sections -->
+  <header class="navbar">
+    <div class="content__container">
+
+      <img id="navbar__logo" src="images/Yarn-Yarn_logo.svg" alt="Yarn-Yarn logo">
+
+      <nav class="navbar__menu">
+
+        <img id="navbar__hamburger" src="images/hamburgermenu_icon.svg" alt="Hamburger menu icon">
+        <img id="navbar__close" class="display-none" src="images/close_icon.svg" alt="Close menu icon">
+        
+        <!-- Navigation starts as empty UL that will be populated with JS -->
+        <ul id="navbar__list" class="closed-nav">
+          
+        </ul>
+      </nav>
+    </div> <!-- End of "content__container" -->
+  </header>
+
+  <main>
+    <header id="main__hero">
+      <div class="content__container">
+        <h1>Lets Yarn!</h1>
+        <p>Lorem ipsum dolor sit amet, adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </header>
+
+    <!-- Each Section has an ID (used for the anchor) and 
+    a data attribute that will populate the li node.
+    Adding more sections will automatically populate nav.
+    The first section is set to active class by default -->
+    <section id="products" data-nav="Products">
+      <div class="content__container">
+        <h2>Our Products</h2>
+        <div id="products__cards-container">
+          <div class="products__card">
+            <div class="products__card--image" id="products__card--image-yarn"></div>
+            <p>Find the right yarn for your project from our wide range of yarn supply.</p>
+            <a href="#" class="link-yellow">Yarn store&nbsp;»</a>
+          </div>
+          <div class="products__card">
+            <div class="products__card--image" id="products__card--image-tools"></div>
+            <p>Find the right tool for your next project.</p>
+            <a href="#" class="link-yellow">Tools store&nbsp;»</a>
+          </div>
+          <div class="products__card">
+            <div class="products__card--image" id="products__card--image-projects"></div>
+            <p>Haven&rsquo;t decided what to create? No problem! Check our projects for ideas.</p>
+            <a href="#" class="link-yellow">Projects collection&nbsp;»</a>
+          </div>
+          <div class="products__card">
+            <div class="products__card--image" id="products__card--image-garments"></div>
+            <p>No time for craft? We&rsquo;ve got you covered!</p>
+            <a href="#" class="link-yellow">Garments store&nbsp;»</a>
+          </div>
+        </div> <!-- End of 'products__cards-container'-->
+      </div> <!-- End of 'content__container'-->
+    </section> <!-- End of 'products' - Products-->
+
+    <section id="tutorials" data-nav="Tutorials">
+      <div class="content__container">
+        <h2>Tutorials</h2>
+        <p>Today&rsquo;s topic &ndash; Christmas craft! For more craft ideas <a href="#" class="link-yellow">click&nbsp;here&nbsp;»</a></p>
+        <div id="tutorials__cards-container">
+          <div id="tutorials__card--gnome" class="tutorials__card">
+            <div class="tutorials__card--image--container"><img src="images/Section-2_Gnome.png" alt="Photo of knitted gnome"></div>
+            <a href="#" class="link-yellow">Cute Christmas gnome&nbsp;»</a>
+          </div>
+          <div id="tutorials__card--stockings" class="tutorials__card">
+            <div class="tutorials__card--image--container"><img src="images/Section-2_Xmas-tree.png" alt="Photo of croched dask Christmas tree"></div>
+            <a href="#" class="link-yellow">Desk Christmas tree&nbsp;»</a>
+          </div>
+          <div id="tutorials__card--Xmas-tree" class="tutorials__card">
+            <div class="tutorials__card--image--container"><img src="images/Section-2_Xmas-socks.png" alt="Photo of knitted mini Christmas socks"></div>
+            <a href="#" class="link-yellow">Mini knit stockings&nbsp;»</a>
+          </div>
+        </div>
+      </div>
+    </section> <!-- End of 'tutorials' - Tutorials -->
+
+    <section id="gallery" data-nav="Gallery" class="active-section-highlighted">
+      <div class="content__container">
+        <h2>Gallery</h2>
+        <p>Our masterpieces for your inspiration!</p>
+          <div id="gallery__cards-container">
+            <img src="images/Section-3_img-1.png" alt="Croched Christmas tree decorations">
+            <img src="images/Section-3_img-2.png" alt="Knitted Christmas tree decorations - bobbles">
+            <img src="images/Section-3_img-3.png" alt="Felt toy bear">
+            <img src="images/Section-3_img-4.png" alt="Croched Christmas tree decorations - bobbles">
+            <img src="images/Section-3_img-5.png" alt="Toy monkey">
+            <img src="images/Section-3_img-6.png" alt="Croched Christmas tree decorations - stars">
+            <img src="images/Section-3_img-7.png" alt="Croched baby throw">
+            <img src="images/Section-3_img-8.png" alt="Croched glowing rug">
+          </div>
+      </div>
+    </section> <!-- End of 'section3' - Gallery -->
+
+    <section id="get-in-touch" data-nav="Get in Touch">
+      <div class="content__container">
+        <h2>Get in Touch</h2>
+        <p>Join our commuity to receive information about our new arrivals, latest deals, interesting tutorials directly into your inbox!</p>
+        <form id="subscribe-form" action="/submit-somewhere">
+          <!-- Name -->
+          <label for="name" id="name-label">Your name&thinsp;<span class="asterisk">*</span></label>
+          <input type="text" id="name" placeholder="Enter your name" name="name" class="textField" required>
+          <!-- End Name -->
+
+          <!-- Email -->
+          <label for="email" id="email-label">Your email&thinsp;<span class="asterisk">*</span></label>
+          <input type="email" id="email" placeholder="Enter your email" name="email" class="textField" required>
+          <!-- End Email -->
+
+          <input type="submit" value="Submit" id="submit">
+        </form>
+        <p>Already a member? Please click the link to <a href="#" class="link-yellow">sign in</a>.</p>
+      </div>
+    </section> <!-- End of 'section4' - Subscribe form -->
+
+  </main>
+
+  <footer>
+    &copy Natalia Petrenko, 2021
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
+
+<!-- <li><a href="#products" class="nav-link active">Products</a></li>
+          <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#get-in-touch" class="nav-link">Get in Touch</a></li> -->

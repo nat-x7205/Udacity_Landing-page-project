@@ -1,0 +1,10 @@
+/* --- SHARED - basic styles and variables --- */
+
+/* -- VARIABLES -- */
+:root {
+  --grey-text: 85, 85, 85;
+  --yellow: 234, 138, 35;
+  --brown: 97, 91, 86;
+}
+
+
