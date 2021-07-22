@@ -1,131 +1,162 @@
 /**
- * 
  * Manipulating the DOM exercise.
  * Exercise programmatically builds navigation,
  * scrolls to anchors from navigation,
  * and highlights section in viewport upon scrolling.
- * 
+ *
  * Dependencies: None
- * 
+ *
  * JS Version: ES2015/ES6
- * 
+ *
  * JS Standard: ESlint
- * 
-*/
+ */
 
-/**
- * Define Global Variables
- * 
-*/
-const sections = document.querySelectorAll('section');
-const navList = document.getElementById('navbar__list');
-// console.log(navList);
-// const dataNavItems = document.querySelectorAll("[data-nav]");
-// console.log(dataNavItems);
+//*************************
+// Define Global Variables
+//*************************
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-//'Add a CSS class (style) to a HTML element' function
-function addToClassList(element, style) {
-  return element.classList.add(style);
-}
+const sections = document.querySelectorAll("section");
+const navList = document.getElementById("navbar__list");
 
-function removeFromClassList(element, style) {
-  return element.classList.remove(style);
-}
+// End Global Variables
+//*************************
 
 
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
+//*************************
+// Start Helper Functions
+//*************************
 
-// build the nav
+//Function 'Add a CSS class (style) to an HTML element'
+//arguments: item = DOM element; style = string
+const addToClassList = (item, style) => {
+  return item.classList.add(style);
+};
 
-function navBarMenu () {
-  const sections = document.querySelectorAll('section');
-  console.log(sections);
+//Function 'Remove a CSS class (style) from an HTML element
+//arguments: item = DOM element; style = string
+const removeFromClassList = (item, style) => {
+  return item.classList.remove(style);
+};
 
-  //Loop over list of sections to build navbar menu items
-  for (section of sections) { 
+//Function (returning boolean) to check if an element is partially visible in screen
+//argument: item = DOM element
+const isInView = (item) => {
+  const position = item.getBoundingClientRect();
+  return (
+    position.top < (window.innerHeight / 3) * 2 &&
+    position.bottom >= (window.innerHeight / 3) * 2
+  );
+};
+
+// End Helper Functions
+//*************************
+
+
+//*************************
+// Begin Main Functions
+//*************************
+
+//Build the navigation menu
+const navBarMenu = (items) => {
+  //Loop over the list of sections to build navbar menu items
+  for (item of items) {
     //Create list items
-    const navItem = document.createElement('li');
+    const navItem = document.createElement("li");
 
-    //Create link elements with "href" and "class" attributes
-    const navItemLink = document.createElement('a');
-      navItemLink.href = `#${section.id}`;
-      navItemLink.classList.add('nav-link');
+    //Create link elements with "href", "class" and "id" attributes
+    const navItemLink = document.createElement("a");
+      navItemLink.href = `#${item.id}`;
+      navItemLink.id = `menu-${item.id}`;
+      addToClassList(navItemLink, "nav-link");
 
-    //Take meny items text from "data-nav" attributes
-    const linkText = document.createTextNode(`${section.dataset.nav}`);
+    //Take menu items text from "data-nav" attributes
+    const linkText = document.createTextNode(`${item.dataset.nav}`);
 
-    //Append elements: "menu text" => <a> => <li> => <ul>
+    //Append elements: "menu item text" => <a> => <li> => <ul>
     navItemLink.appendChild(linkText);
     navItem.appendChild(navItemLink);
     navList.appendChild(navItem);
-
-    // Add class 'active' to section when near top of viewport
-
-    // Scroll to anchor ID using scrollTO event
-  };
-}
-navBarMenu();
-console.log(navList);
-// <li><a href="#products" class="nav-link active">Products</a></li>
-// <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
-// <li><a href="#gallery" class="nav-link">Gallery</a></li>
-// <li><a href="#get-in-touch" class="nav-link">Get in Touch</a></li>
+  }
+};
 
 
+//Function to add class '.active-section-highlighted'
+//to a section when top of it visible > 1/3 of viewport
+//argument: a list of elements
+const sectionAndMenuActivator = (items) => {
+  window.addEventListener("scroll", () => {
+    //Define list of navbar menu items
+    const menuItems = document.getElementsByClassName("nav-link");
+
+    //Remove "active-menu-link-highlighted" class from all menu items
+    for (menuItem of menuItems) {
+      removeFromClassList(menuItem, "active-menu-link-highlighted");
+    };
+
+    for (item of items) {
+      //Define current menu item (it corresponds to section-in-view)
+      const currentMenuItem = document.getElementById(`menu-${item.id}`);
+
+      //Add class "active-section-highlighted" to visible section 
+      //and corresponding menu item
+      if (isInView(item)) {
+        addToClassList(item, "active-section-highlighted");
+        addToClassList(currentMenuItem, "active-menu-link-highlighted");
+      } else {
+        removeFromClassList(item, "active-section-highlighted");
+      }
+    }
+  });
+};
+
+// End Main Functions
+//*************************
 
 
+//*************************
+// Begin Events
+//*************************
 
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
+// Build menu
+navBarMenu(sections);
 
 // Set sections as active
+sectionAndMenuActivator(sections);
 
-/******************************************/
+
+
+//*************************
 // Mobile menu open/close
-/******************************************/
+//*************************
 
-const hamburgerIcon = document.getElementById('navbar__hamburger');
-const closeIcon = document.getElementById('navbar__close');
-const navListMenu = document.getElementById('navbar__list');
+const hamburgerIcon = document.getElementById("navbar__hamburger");
+const closeIcon = document.getElementById("navbar__close");
+const navListMenu = document.getElementById("navbar__list");
 
-hamburgerIcon.addEventListener('click', () => {
-  // Set time out to see icons rotate animation
+//Open mobile navbar
+hamburgerIcon.addEventListener("click", () => {
+  // Set time out to see icons rotate CSS animation
   window.setTimeout(() => {
-    // hamburgerIcon.classList.add('display-none');
-    // closeIcon.classList.remove('display-none');
-    // navListMenu.classList.remove('closed-nav');
-    addToClassList(hamburgerIcon, 'display-none');
-    removeFromClassList(closeIcon, 'display-none');
-    removeFromClassList(navListMenu, 'closed-nav');
+    //Hide "hamburgermenu_icon.svg" by adding "display-none" CSS class
+    addToClassList(hamburgerIcon, "display-none");
+    //Show "close_icon.svg" by removing "display-none" CSS class
+    removeFromClassList(closeIcon, "display-none");
+    //Open mobile menu by removing "closed-nav" CSS class
+    removeFromClassList(navListMenu, "closed-nav");
   }, 200);
 });
 
-closeIcon.addEventListener('click', () => {
+//Close mobile navbar
+closeIcon.addEventListener("click", () => {
   // Set time out to see icons rotate animation
   window.setTimeout(() => {
-    // closeIcon.classList.add('display-none');
-    // hamburgerIcon.classList.remove('display-none');
-    // navListMenu.classList.add('closed-nav');
-    addToClassList(closeIcon, 'display-none');
-    removeFromClassList(hamburgerIcon, 'display-none');
-    addToClassList(navListMenu, 'closed-nav');
+    //Hide "close_icon.svg" by adding "display-none" CSS class
+    addToClassList(closeIcon, "display-none");
+    //Show "hamburgermenu_icon.svg" by removing "display-none" CSS class
+    removeFromClassList(hamburgerIcon, "display-none");
+    //Close (hide) mobile menu by adding "closed-nav" CSS class
+    addToClassList(navListMenu, "closed-nav");
   }, 200);
 });
 
-/******************************************/
+//*************************

@@ -1,6 +1,3 @@
-/* -- import Google fonts -- */
-/* @import url('https://fonts.googleapis.com/css?family=Montserrat:300,500,600|Sacramento'); */
-
 /* -- import variables -- */
 @import "shared.css";
 
@@ -22,7 +19,6 @@ body {
   line-height: 1.4rem;
   color: rgb(var(--grey-text));
   font-size: 18px;
-  /* background-color: antiquewhite; */
 }
 
 h1,
@@ -35,7 +31,6 @@ h2 {
 h1 {
   font-size: 4.5rem;
   margin-top: 3rem;
-  /* margin-bottom: 1.5rem; */
   line-height: 4.5rem;
 }
 
@@ -68,7 +63,6 @@ section {
   justify-content: center;
   margin: 12px;
   padding: 5rem 0;
-  /* height: 100vh; */
 }
 
 .content__container {
@@ -123,7 +117,6 @@ section {
 }
 
 #navbar__list {
-  /* display: none; */
   text-decoration: none;
   list-style: none;
   position: fixed;
@@ -137,7 +130,6 @@ section {
 
 .closed-nav {
   transform: translateX(calc(100% - 8px));
-  /* transition: transform .2s ease; */
 }
 
 .nav-link {
@@ -147,14 +139,13 @@ section {
   color: rgb(var(--brown));
   font-weight: 500;
   font-size: 1rem;
-  /* background-color: rgba(254, 249, 244, .9);*/ /* yellowish */
   background-color: rgba(253, 243, 233, .9); /* yellowish */
 }
 
-.nav-link:active,
-.nav-link.active {
+.nav-link.active-menu-link-highlighted {
   color: white;
   background-color: rgb(var(--yellow));
+  transition: transform .2s ease;
 }
 /* End of NAVBAR STYLES */
 
@@ -446,6 +437,12 @@ footer {
   .nav-link:hover {
     color: rgb(var(--yellow));
     transition: color .2s ease;
+  }
+
+  .nav-link.active-menu-link-highlighted {
+    color: white;
+    background-color: rgb(var(--yellow));
+    transition: transform .2s ease;
   }
   /* End of NAVBAR STYLES */
 
