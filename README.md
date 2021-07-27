@@ -14,6 +14,9 @@ The project requirements are to build a multi-section landing page, with a dynam
 - [x] **Section Active State:** sections are highlighted when in view while scrolling through the page.
 - [x] **Scroll to Anchor:** when clicking an item from the navigation menu, the link scrolls to the appropriate section.
 
+## Demo
+The [demo version](https://nat-x7205.github.io/Udacity_Landing-page-project/) of the project.
+
 ## Get started
 1. Clone the GitHub repository to you computer.
 2. Open the `index.html` file into your browser.
